@@ -19,13 +19,13 @@ const Dashboard: React.FC<DashboardProps> = ({ reports, userRole, settings }) =>
     tithes: acc.tithes + (r.tithes || 0),
     offerings: acc.offerings + (r.offerings || 0),
     pix: acc.pix + (r.offeringsPix || 0) + ((r.titheEntries || []).filter(te => te.method === 'PIX').reduce((s, e) => s + e.amount, 0)),
-    cash: acc.cash + (r.offeringsCash || 0) + ((r.titheEntries || []).filter(te => te.method === 'ESPÉCIE').reduce((s, e) => s + e.amount, 0))
+    cash: acc.cash + (r.offeringsCash || 0) + ((r.titheEntries || []).filter(te => te.method === 'ESPECIE').reduce((s, e) => s + e.amount, 0))
   }), { tithes: 0, offerings: 0, pix: 0, cash: 0 });
 
   const currentMonthTotal = reports
     .filter(r => new Date(r.date).getMonth() === new Date().getMonth())
     .reduce((acc, curr) => acc + curr.total, 0);
-    
+
   const goalProgress = settings.monthlyGoal > 0 ? (currentMonthTotal / settings.monthlyGoal) * 100 : 0;
 
   const distributionData = [
@@ -58,7 +58,7 @@ const Dashboard: React.FC<DashboardProps> = ({ reports, userRole, settings }) =>
           <p className="text-slate-500 font-bold uppercase text-xs tracking-[0.4em] mt-2">Painel Consolidado de Gestão</p>
         </div>
         {userRole === UserRole.PASTOR && (
-          <button 
+          <button
             onClick={handleGetInsights}
             className="group inline-flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-2xl font-black transition-all hover:bg-indigo-600 shadow-2xl"
           >
@@ -80,8 +80,8 @@ const Dashboard: React.FC<DashboardProps> = ({ reports, userRole, settings }) =>
         </div>
         <div className="bg-indigo-600 p-8 rounded-[2rem] text-white shadow-lg md:col-span-2">
           <div className="flex justify-between items-center mb-4">
-             <p className="text-[10px] font-black uppercase tracking-widest opacity-70">Arrecadação do Mês</p>
-             <span className="text-xs font-black">{Math.round(goalProgress)}% da meta</span>
+            <p className="text-[10px] font-black uppercase tracking-widest opacity-70">Arrecadação do Mês</p>
+            <span className="text-xs font-black">{Math.round(goalProgress)}% da meta</span>
           </div>
           <p className="text-3xl font-black mb-4">{currentMonthTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
           <div className="w-full h-3 bg-white/20 rounded-full overflow-hidden">
@@ -109,8 +109,8 @@ const Dashboard: React.FC<DashboardProps> = ({ reports, userRole, settings }) =>
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontWeight: 700, fontSize: 10}} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontWeight: 700, fontSize: 10}} />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontWeight: 700, fontSize: 10 }} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontWeight: 700, fontSize: 10 }} />
                 <Tooltip contentStyle={{ borderRadius: '20px', border: 'none', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }} />
                 <Area type="monotone" dataKey="total" stroke="#4338ca" strokeWidth={4} fill="#4338ca10" />
               </AreaChart>
@@ -120,7 +120,7 @@ const Dashboard: React.FC<DashboardProps> = ({ reports, userRole, settings }) =>
 
         <div className="bg-white p-10 rounded-[3rem] border-2 border-slate-100 shadow-xl">
           <h4 className="font-black text-slate-900 mb-10 flex items-center gap-3 uppercase text-[10px] tracking-widest">
-             <div className="w-2 h-6 bg-cyan-500 rounded-full"></div> Meios de Recebimento
+            <div className="w-2 h-6 bg-cyan-500 rounded-full"></div> Meios de Recebimento
           </h4>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
