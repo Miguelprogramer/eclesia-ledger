@@ -51,7 +51,11 @@ router.get('/', async (req, res) => {
         res.json(formattedReports);
     } catch (error) {
         console.error('Get reports error:', error);
-        res.status(500).json({ error: 'Erro ao buscar relatórios' });
+        res.status(500).json({
+            error: 'Erro ao buscar relatórios',
+            details: error.message,
+            stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+        });
     }
 });
 
@@ -95,7 +99,10 @@ router.get('/:id', async (req, res) => {
         });
     } catch (error) {
         console.error('Get report error:', error);
-        res.status(500).json({ error: 'Erro ao buscar relatório' });
+        res.status(500).json({
+            error: 'Erro ao buscar relatório',
+            details: error.message
+        });
     }
 });
 

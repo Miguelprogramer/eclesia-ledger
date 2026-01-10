@@ -35,7 +35,10 @@ router.get('/', async (req, res) => {
         res.json(settings);
     } catch (error) {
         console.error('Get settings error:', error);
-        res.status(500).json({ error: 'Erro ao buscar configurações' });
+        res.status(500).json({
+            error: 'Erro ao buscar configurações',
+            details: error.message
+        });
     }
 });
 
@@ -86,7 +89,10 @@ router.put('/', async (req, res) => {
         res.json(settings);
     } catch (error) {
         console.error('Update settings error:', error);
-        res.status(500).json({ error: 'Erro ao atualizar configurações' });
+        res.status(500).json({
+            error: 'Erro ao atualizar configurações',
+            details: error.message
+        });
     }
 });
 

@@ -68,7 +68,10 @@ router.post('/login', async (req, res) => {
         });
     } catch (error) {
         console.error('Login error:', error);
-        res.status(500).json({ error: 'Erro ao fazer login' });
+        res.status(500).json({
+            error: 'Erro ao fazer login',
+            details: error.message
+        });
     }
 });
 
@@ -131,7 +134,10 @@ router.post('/register', async (req, res) => {
         res.status(201).json(userWithoutPassword);
     } catch (error) {
         console.error('Register error:', error);
-        res.status(500).json({ error: 'Erro ao registrar usuário' });
+        res.status(500).json({
+            error: 'Erro ao registrar usuário',
+            details: error.message
+        });
     }
 });
 
