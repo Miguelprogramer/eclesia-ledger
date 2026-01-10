@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  PASTOR
+  DIACONO
+}
+
+enum ServiceType {
+  DOMINGO
+  QUARTA_FEIRA
+  SANTA_CEIA
+  ESPECIAL
+}
+
+enum PaymentMethod {
+  PIX
+  ESPECIE
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  role      UserRole
+  password  String   // User password
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Report {
+  id            String      @id
+  date          DateTime
+  serviceType   ServiceType
+  deaconName    String
+  attendance    Int
+  visitors      Int
+  tithes        Float       @default(0)
+  offeringsPix  Float       @default(0)
+  offeringsCash Float       @default(0)
+  offerings     Float       @default(0)
+  total         Float       @default(0)
+  notes         String?
+  timestamp     BigInt
+  titheEntries  String      // JSON string
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Settings {
+  id          Int      @id @default(autoincrement())
+  churchName  String
+  monthlyGoal Float
+  updatedAt   DateTime @updatedAt
+}

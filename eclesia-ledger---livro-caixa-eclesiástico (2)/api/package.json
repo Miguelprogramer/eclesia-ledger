@@ -1,0 +1,32 @@
+{
+  "name": "eclesia-ledger-api",
+  "version": "1.0.0",
+  "description": "REST API for Eclesia Ledger - Church Management System",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "node src/server.js",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "node src/seed.js",
+    "db:studio": "prisma studio"
+  },
+  "keywords": [
+    "church",
+    "management",
+    "api",
+    "rest"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.1.0",
+    "express": "^4.21.2",
+    "cors": "^2.8.5",
+    "swagger-ui-express": "^5.0.1",
+    "swagger-jsdoc": "^6.2.8"
+  },
+  "devDependencies": {
+    "prisma": "^6.1.0"
+  }
+}
