@@ -18,8 +18,8 @@ const Dashboard: React.FC<DashboardProps> = ({ reports, userRole, settings }) =>
   const totals = reports.reduce((acc, r) => ({
     tithes: acc.tithes + (r.tithes || 0),
     offerings: acc.offerings + (r.offerings || 0),
-    pix: acc.pix + (r.offeringsPix || 0) + (r.titheEntries?.filter(te => te.method === 'PIX').reduce((s, e) => s + e.amount, 0) || 0),
-    cash: acc.cash + (r.offeringsCash || 0) + (r.titheEntries?.filter(te => te.method === 'ESPÉCIE').reduce((s, e) => s + e.amount, 0) || 0)
+    pix: acc.pix + (r.offeringsPix || 0) + ((r.titheEntries || []).filter(te => te.method === 'PIX').reduce((s, e) => s + e.amount, 0)),
+    cash: acc.cash + (r.offeringsCash || 0) + ((r.titheEntries || []).filter(te => te.method === 'ESPÉCIE').reduce((s, e) => s + e.amount, 0))
   }), { tithes: 0, offerings: 0, pix: 0, cash: 0 });
 
   const currentMonthTotal = reports
