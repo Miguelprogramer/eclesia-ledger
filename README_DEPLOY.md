@@ -5,7 +5,8 @@ Siga este guia para colocar seu sistema online de forma gratuita e profissional 
 ## 1. Banco de Dados (Neon.tech)
 1. Crie uma conta em [Neon.tech](https://neon.tech).
 2. Crie um novo projeto chamado `eclesia-ledger`.
-3. Copie a **Connection String** (algo como `postgresql://user:pass@ep-ghost-123.neon.tech/neondb`).
+3. Copie a **Connection String** do tipo "Prisma" ou "Direct Connection" (algo como `postgresql://user:pass@ep-ghost-123.neon.tech/neondb`).
+   - **AVISO**: Não copie o comando `psql`. O link deve começar direto com `postgresql://`.
 4. **Guarde este link**, você precisará dele no passo do Render.
 
 ## 2. Backend (Render.com)
