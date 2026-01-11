@@ -17,7 +17,9 @@ enum UserRole {
 
 enum ServiceType {
   DOMINGO
+  TERCA_FEIRA
   QUARTA_FEIRA
+  SEXTA_FEIRA
   SANTA_CEIA
   ESPECIAL
 }

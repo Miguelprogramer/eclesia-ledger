@@ -32,7 +32,7 @@ const Layout: React.FC<LayoutProps> = ({ children, user, onLogout, onNavigate, a
                 >
                   <i className="fas fa-gauge-high"></i> Painel Geral
                 </button>
-                {user?.role === UserRole.DEACON && (
+                {(user?.role === UserRole.DEACON || user?.role === UserRole.PASTOR) && (
                   <button
                     onClick={() => onNavigate('report-form')}
                     className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl font-black text-sm transition-all ${activeView === 'report-form' ? 'bg-indigo-700 text-white shadow-xl shadow-indigo-900/50' : 'text-indigo-200 hover:bg-indigo-900'}`}

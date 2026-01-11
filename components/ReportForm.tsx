@@ -42,12 +42,32 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit, currentUser, editingR
 
   const totalTithes = useMemo(() => titheEntries.reduce((acc, curr) => acc + curr.amount, 0), [titheEntries]);
 
+  const identifyServiceType = (dateStr: string): ServiceType => {
+    const date = new Date(dateStr + 'T12:00:00'); // Use noon to avoid timezone issues
+    const day = date.getDay();
+    if (day === 0) return 'DOMINGO';
+    if (day === 2) return 'TERCA_FEIRA';
+    if (day === 3) return 'QUARTA_FEIRA';
+    if (day === 5) return 'SEXTA_FEIRA';
+    return formData.serviceType; // Keep current if it's a "special" day or Santa Ceia
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: ['notes', 'date', 'deaconName', 'serviceType'].includes(name) ? value : Math.max(0, Number(value))
-    }));
+
+    if (name === 'date') {
+      const newType = identifyServiceType(value);
+      setFormData(prev => ({
+        ...prev,
+        date: value,
+        serviceType: newType
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: ['notes', 'date', 'deaconName', 'serviceType'].includes(name) ? value : Math.max(0, Number(value))
+      }));
+    }
   };
 
   const addTitheEntry = () => {
@@ -95,7 +115,9 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit, currentUser, editingR
             <label className={labelClasses}>Categoria de Evento</label>
             <select name="serviceType" value={formData.serviceType} onChange={handleChange} className={`${inputBase} appearance-none`}>
               <option value="DOMINGO">DOMINGO</option>
+              <option value="TERCA_FEIRA">TERÇA-FEIRA</option>
               <option value="QUARTA_FEIRA">QUARTA-FEIRA</option>
+              <option value="SEXTA_FEIRA">SEXTA-FEIRA</option>
               <option value="SANTA_CEIA">SANTA CEIA</option>
               <option value="ESPECIAL">EVENTO ESPECIAL</option>
             </select>
