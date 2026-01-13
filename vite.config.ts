@@ -11,9 +11,8 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [react()],
     define: {
-      'process.env.API_KEY': JSON.stringify(env.GITHUB_MODELS_API_KEY || ''),
-      'process.env.GITHUB_MODELS_API_KEY': JSON.stringify(env.GITHUB_MODELS_API_KEY || ''),
-      'process.env': {}
+      'process.env.API_KEY': JSON.stringify(env.VITE_GITHUB_MODELS_API_KEY || env.GITHUB_MODELS_API_KEY || ''),
+      'process.env.GITHUB_MODELS_API_KEY': JSON.stringify(env.VITE_GITHUB_MODELS_API_KEY || env.GITHUB_MODELS_API_KEY || ''),
     },
     resolve: {
       alias: {
