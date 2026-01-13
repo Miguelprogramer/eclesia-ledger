@@ -1,12 +1,16 @@
 
-import { GoogleGenAI } from "@google/genai";
 import { ChurchReport } from "../types";
 
-// Fix: Initialize GoogleGenAI using a named parameter with process.env.API_KEY directly
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const GITHUB_MODELS_API_URL = "https://api.inference.github.com/v1/chat/completions";
+const API_KEY = process.env.GITHUB_MODELS_API_KEY || process.env.API_KEY;
 
 export const getFinancialInsights = async (reports: ChurchReport[]): Promise<string> => {
   if (reports.length === 0) return "Não há dados suficientes para gerar insights.";
+
+  if (!API_KEY) {
+    console.error("GitHub Models API Key não configurada");
+    return "Chave de API não configurada. Configure GITHUB_MODELS_API_KEY no arquivo .env";
+  }
 
   const reportsSummary = reports.map(r => ({
     data: r.date,
@@ -29,15 +33,33 @@ export const getFinancialInsights = async (reports: ChurchReport[]): Promise<str
   `;
 
   try {
-    // Fix: Call generateContent directly from ai.models as per the latest guidelines
-    const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: prompt,
+    const response = await fetch(GITHUB_MODELS_API_URL, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+      }),
     });
-    // Fix: Access response.text as a property, not a method
-    return response.text || "Erro ao gerar análise.";
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error("GitHub Models API Error:", errorData);
+      throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.choices?.[0]?.message?.content || "Erro ao gerar análise.";
   } catch (error) {
-    console.error("Gemini Error:", error);
+    console.error("GitHub Models Error:", error);
     return "Desculpe, não consegui analisar os dados no momento.";
   }
 };
