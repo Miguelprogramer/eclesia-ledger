@@ -58,13 +58,22 @@ const Dashboard: React.FC<DashboardProps> = ({ reports, userRole, settings }) =>
           <p className="text-slate-500 font-bold uppercase text-xs tracking-[0.4em] mt-2">Painel Consolidado de Gestão</p>
         </div>
         {userRole === UserRole.PASTOR && (
-          <button
-            onClick={handleGetInsights}
-            className="group inline-flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-2xl font-black transition-all hover:bg-indigo-600 shadow-2xl"
-          >
-            <i className={`fas ${loadingInsight ? 'fa-spinner fa-spin' : 'fa-wand-magic-sparkles'}`}></i>
-            GERAR RELATÓRIO IA
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={() => (window as any).onNavigate('report-form')}
+              className="group inline-flex items-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-2xl font-black transition-all hover:bg-indigo-500 shadow-2xl"
+            >
+              <i className="fas fa-file-circle-plus"></i>
+              NOVA ATA
+            </button>
+            <button
+              onClick={handleGetInsights}
+              className="group inline-flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-2xl font-black transition-all hover:bg-indigo-600 shadow-2xl"
+            >
+              <i className={`fas ${loadingInsight ? 'fa-spinner fa-spin' : 'fa-wand-magic-sparkles'}`}></i>
+              GERAR RELATÓRIO IA
+            </button>
+          </div>
         )}
       </header>
 

@@ -27,14 +27,19 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const initDb = async () => {
-      setLoading(true);
-      const [loadedReports, loadedSettings] = await Promise.all([
-        dbService.getReports(),
-        dbService.getSettings()
-      ]);
-      setReports(loadedReports);
-      setSettings(loadedSettings);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const [loadedReports, loadedSettings] = await Promise.all([
+          dbService.getReports(),
+          dbService.getSettings()
+        ]);
+        setReports(loadedReports);
+        setSettings(loadedSettings);
+      } catch (error) {
+        console.error('Error initializing data:', error);
+      } finally {
+        setLoading(false);
+      }
     };
     initDb();
   }, []);

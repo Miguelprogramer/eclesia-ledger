@@ -128,11 +128,11 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit, currentUser, editingR
         <div className="grid grid-cols-2 gap-10">
           <div>
             <label className={labelClasses}>Membros Presentes</label>
-            <input type="number" name="attendance" value={formData.attendance || ''} onChange={handleChange} placeholder="0" className={`${inputBase} text-blue-400`} required />
+            <input type="number" name="attendance" value={formData.attendance || ''} onChange={handleChange} placeholder="0" className={`${inputBase} text-blue-400`} /> //required
           </div>
           <div>
             <label className={labelClasses}>Novos Visitantes</label>
-            <input type="number" name="visitors" value={formData.visitors || ''} onChange={handleChange} placeholder="0" className={`${inputBase} text-orange-400`} required />
+            <input type="number" name="visitors" value={formData.visitors || ''} onChange={handleChange} placeholder="0" className={`${inputBase} text-orange-400`} /> //required
           </div>
         </div>
 
@@ -228,7 +228,7 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit, currentUser, editingR
                   onChange={handleChange}
                   placeholder="0,00"
                   className={`${inputBase} pl-14 text-emerald-400 text-2xl tracking-tighter focus:border-emerald-500`}
-                  required
+                //required
                 />
               </div>
             </div>
@@ -244,7 +244,7 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit, currentUser, editingR
                   onChange={handleChange}
                   placeholder="0,00"
                   className={`${inputBase} pl-14 text-cyan-400 text-2xl tracking-tighter focus:border-cyan-500`}
-                  required
+                //required
                 />
               </div>
             </div>
