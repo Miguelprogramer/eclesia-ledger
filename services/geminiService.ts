@@ -2,7 +2,7 @@
 import { ChurchReport } from "../types";
 
 const GITHUB_MODELS_API_URL = "https://api.inference.github.com/v1/chat/completions";
-const API_KEY = process.env.GITHUB_MODELS_API_KEY || process.env.API_KEY;
+const API_KEY = import.meta.env.VITE_GITHUB_MODELS_API_KEY;
 
 export const getFinancialInsights = async (reports: ChurchReport[]): Promise<string> => {
   if (reports.length === 0) return "Não há dados suficientes para gerar insights.";
