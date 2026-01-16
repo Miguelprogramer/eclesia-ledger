@@ -4,7 +4,7 @@ export enum UserRole {
   DEACON = 'DIACONO'
 }
 
-export type ServiceType = 'DOMINGO' | 'TERCA_FEIRA' | 'QUARTA_FEIRA' | 'SEXTA_FEIRA' | 'SANTA_CEIA' | 'ESPECIAL';
+export type ServiceType = 'DOMINGO' | 'TERCA' | 'QUARTA' | 'SEXTA' | 'SANTA_CEIA' | 'ESPECIAL';
 export type PaymentMethod = 'PIX' | 'ESPECIE';
 
 export interface TitheEntry {

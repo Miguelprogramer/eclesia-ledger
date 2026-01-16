@@ -46,9 +46,9 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit, currentUser, editingR
     const date = new Date(dateStr + 'T12:00:00'); // Use noon to avoid timezone issues
     const day = date.getDay();
     if (day === 0) return 'DOMINGO';
-    if (day === 2) return 'TERCA_FEIRA';
-    if (day === 3) return 'QUARTA_FEIRA';
-    if (day === 5) return 'SEXTA_FEIRA';
+    if (day === 2) return 'TERCA';
+    if (day === 3) return 'QUARTA';
+    if (day === 5) return 'SEXTA';
     return formData.serviceType; // Keep current if it's a "special" day or Santa Ceia
   };
 
@@ -115,9 +115,9 @@ const ReportForm: React.FC<ReportFormProps> = ({ onSubmit, currentUser, editingR
             <label className={labelClasses}>Categoria de Evento</label>
             <select name="serviceType" value={formData.serviceType} onChange={handleChange} className={`${inputBase} appearance-none`}>
               <option value="DOMINGO">DOMINGO</option>
-              <option value="TERCA_FEIRA">TERÇA-FEIRA</option>
-              <option value="QUARTA_FEIRA">QUARTA-FEIRA</option>
-              <option value="SEXTA_FEIRA">SEXTA-FEIRA</option>
+              <option value="TERCA">TERÇA-FEIRA</option>
+              <option value="QUARTA">QUARTA-FEIRA</option>
+              <option value="SEXTA">SEXTA-FEIRA</option>
               <option value="SANTA_CEIA">SANTA CEIA</option>
               <option value="ESPECIAL">EVENTO ESPECIAL</option>
             </select>
